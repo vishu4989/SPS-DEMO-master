@@ -3,6 +3,7 @@ package com.capgemini.controller;
 import java.util.List;
 
 import javax.validation.Valid;
+import javax.validation.constraints.Email;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -17,6 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.capgemini.exceptionhandling.ResourceNotFoundException;
 import com.capgemini.model.BaseResponse;
+import com.capgemini.model.UserFriandsListResponse;
 import com.capgemini.service.FrientMangmtService;
 import com.capgemini.validation.FriendManagementValidation;
 
@@ -118,5 +121,45 @@ public class FriendManagementController {
 		return new ResponseEntity<FriendManagementValidation>(fmError, HttpStatus.BAD_REQUEST);
 
 	}
+	
+	
+	/*@RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.GET)
+	  public Shipwreck get(@PathVariable Long id){
+	    return ShipwreckStub.get(id);
+	  }
+	  @RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.PUT)
+	  public Shipwreck update(@PathVariable Long id, @RequestBody Shipwreck shipwreck){
+	    return ShipwreckStub.update(id, shipwreck);
+	  }
+	  @RequestMapping(value = "shipwrecks/{id}", method = RequestMethod.DELETE)
+	  public Shipwreck delete(@PathVariable Long id){
+	    return ShipwreckStub.delete(id);
+	  }*/
+	
+	  
+	//public ResponseEntity<UserFriandsListResponse> RetrieveFriendList(@Email @Valid @PathVariable String emailid)throws ResourceNotFoundException {
+	@RequestMapping(value = "/friends/{id}", method = RequestMethod.GET)
+	public ResponseEntity<UserFriandsListResponse> RetrieveFriendList(@Email @Valid @PathVariable String id)throws ResourceNotFoundException {	
+		//public ResponseEntity<UserFriandsListResponse> RetrieveFriendList(@PathVariable String id )throws ResourceNotFoundException {
+		System.out.println("---------------" +id);
+		UserFriandsListResponse response = frndMngtServc.retrieveFriendsEmails(id );
+		ResponseEntity<UserFriandsListResponse> responseEntity = null;
+		System.out.println("---------------");
+		if(response.getStatus() == SUCCESS_STATUS){
+			response.setStatus(SUCCESS_STATUS);
+			responseEntity = new ResponseEntity<UserFriandsListResponse>(response, HttpStatus.OK);
+		} else {
+			response.setStatus(ERROR_STATUS);
+			responseEntity = new ResponseEntity<UserFriandsListResponse>(response, HttpStatus.BAD_REQUEST);
+			//response.setCode(AUTH_FAILURE);
+		}
+		return responseEntity;
+		
+
+
+	}
+	
+	
+	
 
 }

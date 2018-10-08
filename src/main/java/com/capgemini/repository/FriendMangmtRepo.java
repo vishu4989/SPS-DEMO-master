@@ -16,6 +16,7 @@ import com.capgemini.validation.FriendManagementValidation;
 import com.capgemini.exceptionhandling.ResourceNotFoundException;
 import com.capgemini.model.ResponseUser;
 import com.capgemini.model.Subscriber;
+import com.capgemini.model.UserFriandsListResponse;
 
 @Repository
 public class FriendMangmtRepo {
@@ -120,5 +121,27 @@ public class FriendMangmtRepo {
 		}
 	}
 
+	
+	
+	
+	
+	
+	public UserFriandsListResponse retrieveFriendsEmails(String email) throws ResourceNotFoundException {	
+	
+		UserFriandsListResponse emailListresponse = new UserFriandsListResponse();
+		emailListresponse.setStatus("success");
+		emailListresponse.setCount(new Integer(2));
+		emailListresponse.getFriends().add("som1@gmail.com");
+		emailListresponse.getFriends().add("som2@gmail.com");
+		System.out.println("########## " +emailListresponse.getStatus());
+		System.out.println("########## " +emailListresponse.getCount());
+		System.out.println("########## " +emailListresponse.getFriends().get(0));
+		System.out.println("########## " +emailListresponse.getFriends().get(1));
+		return emailListresponse;
+		
+	}
+	
+	
+	
 
 }
