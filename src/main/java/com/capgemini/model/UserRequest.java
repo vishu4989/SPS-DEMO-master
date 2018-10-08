@@ -3,13 +3,13 @@ package com.capgemini.model;
 import java.util.List;
 
 public class UserRequest {
-	
+
 	private List<String> friends;
 	//private String emailFirst;
 	//private String emailSecond;
-	
-	
-	
+
+
+
 	/*public String getEmailFirst() {
 		return emailFirst;
 	}
@@ -31,9 +31,9 @@ public class UserRequest {
 		this.friends = friends;
 	}
 
-	
-	
-	
-	
+
+
+
+
 
 }

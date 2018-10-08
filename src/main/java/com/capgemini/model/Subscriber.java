@@ -6,25 +6,25 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 public class Subscriber {
-    
+
 	@NotNull 
-	@NotEmpty(message = "Please enter requestor email id") 
-	@Email(message = "Give valid requestor email id")
-    @Size(max = 5, message = "It should not be more than 5 charaters")
+	@NotEmpty(message = "{requestorEmail.notempty}") 
+	@Email(message = "{requestorEmail.valid}")
+	@Size(max = 30, message = "{requestorEmail.size}")
 	String requestor;
-	
+
 	@NotNull 
-	@NotEmpty(message = "Please enter target email id") 
-	@Email(message = "Give valid target email id")
-    @Size(max = 5, message = "It should not be more than 5 charaters")
-    String target;
-    
-       
+	@NotEmpty(message = "{targetEmail.notempty}") 
+	@Email(message = "{targetEmail.valid}")
+	@Size(max = 30, message = "{targetEmail.size}")
+	String target;
+
+
 	public Subscriber() {
-		
+
 	}
 
-	
+
 	public String getRequestor() {
 		return requestor;
 	}
@@ -37,6 +37,6 @@ public class Subscriber {
 	public void setTarget(String target) {
 		this.target = target;
 	}
-    
-    
+
+
 }
